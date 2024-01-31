@@ -1,7 +1,5 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { useMemo, useState } from "react";
 import Todo from "@/components/todo";
 import EmptyList from "@/components/empty-list";
@@ -12,6 +10,9 @@ export default function Home() {
   const items = useTodoStore((state) => state.items);
   const addItem = useTodoStore((state) => state.add);
   const removeItem = useTodoStore((state) => state.remove);
+  const removeAllCompeletedItems = useTodoStore(
+    (state) => state.removeAllCompeleted
+  );
 
   const [newItemTitle, setNewItemTitle] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -75,8 +76,8 @@ export default function Home() {
     <main className="flex flex-col items-center justify-start gap-10 w-full">
       {/* header */}
       <header className="flex justify-center border-b border-slate-300 bg-slate-50 py-4 w-full">
-        <div className="flex items-center justify-start w-3/4 max-w-7xl">
-          <h1 className="font-bold mr-10 text-lg text-slate-700">
+        <div className="flex items-center justify-start gap-4 w-3/4 max-w-7xl">
+          <h1 className="font-bold text-lg text-slate-700">
             <span className="inline-block mr-2">📝</span> Next Todo Application
           </h1>
 
@@ -90,6 +91,17 @@ export default function Home() {
               setSearchQuery(e.target.value);
             }}
           />
+
+          {/* remove all compeleted */}
+          <button
+            type="submit"
+            className="text-white text-sm px-4 h-10 flex items-center justify-center pb-0.5 mr-0 ml-auto rounded-md bg-green-600 enabled:hover:bg-green-800 transition-colors disabled:cursor-not-allowed disabled:opacity-45"
+            disabled={!!!completedItems.length}
+            onClick={removeAllCompeletedItems}
+          >
+            <span className="inline-block mr-2"></span>
+            REMOVE ALL COMPELETED
+          </button>
         </div>
       </header>
 
@@ -103,7 +115,7 @@ export default function Home() {
           }}
         >
           <h2 className="font-bold mb-3 text-slate-700">
-            <span className="inline-block mr-2">✏️</span> Add new item
+            <span className="inline-block mr-2">✏️</span> ADD NEW ITEM
           </h2>
           <div className="grid grid-cols-4 gap-4">
             <input
@@ -119,10 +131,7 @@ export default function Home() {
               className="w-full max-w-36 text-white text-sm px-4 h-10 flex items-center justify-center pb-0.5 mr-0 ml-auto rounded-md bg-blue-600 enabled:hover:bg-blue-800 transition-colors disabled:cursor-not-allowed disabled:opacity-45"
               disabled={!!!newItemTitle}
             >
-              <FontAwesomeIcon
-                icon={faCirclePlus}
-                className="w-5 h-5 mr-2 relative top-[1px]"
-              />
+              <span className="inline-block mr-2"></span>
               Add Item
             </button>
           </div>
@@ -130,13 +139,13 @@ export default function Home() {
 
         {/* to-do section */}
         <section className="flex flex-col ml-auto mr-auto w-full">
-          <h2 className="font-bold mb-3 text-slate-700">To-do</h2>
+          <h2 className="font-bold mb-3 text-slate-700">TO-DO</h2>
           <div className="grid gap-3">{handleRenderItems(false)}</div>
         </section>
 
         {/* completed section */}
         <section className="flex flex-col ml-auto mr-auto w-full">
-          <h2 className="font-bold mb-3 text-slate-700">Completed</h2>
+          <h2 className="font-bold mb-3 text-slate-700">COMPLETED</h2>
           <div className="grid gap-3 w-full">{handleRenderItems(true)}</div>
         </section>
       </div>
