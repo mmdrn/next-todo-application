@@ -11,6 +11,7 @@ import moment from "moment";
 export default function Home() {
   const items = useTodoStore((state) => state.items);
   const addItem = useTodoStore((state) => state.add);
+  const removeItem = useTodoStore((state) => state.remove);
 
   const uncompletedItems = useMemo(() => {
     return items.filter((item) => !item.status);
@@ -51,6 +52,7 @@ export default function Home() {
             date={moment(item.date).format("MMMM DD YYYY")}
             status={item.status}
             clickHandler={() => handleChangeItemStatus(item.id)}
+            deleteHandler={() => removeItem(item.id)}
           />
         ))
       ) : (
@@ -65,6 +67,7 @@ export default function Home() {
             date={moment(item.date).format("MMMM DD YYYY")}
             status={item.status}
             clickHandler={() => handleChangeItemStatus(item.id)}
+            deleteHandler={() => removeItem(item.id)}
           />
         ))
       ) : (
