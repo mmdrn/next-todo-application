@@ -1,8 +1,11 @@
 import { Props } from "./types";
 
-export default function Todo({ date, title, status }: Props) {
+export default function Todo({ date, title, status, clickHandler }: Props) {
   return (
-    <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors grid grid-cols-4 gap-4 w-full">
+    <article
+      className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors grid grid-cols-4 gap-4 w-full"
+      onClick={clickHandler}
+    >
       <div className="flex flex-start justify-start col-span-3">
         <span className="flex items-center mr-4">{status ? "✅" : "⭕️"}</span>
         <p className="overflow-hidden truncate">{title}</p>
