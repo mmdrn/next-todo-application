@@ -8,7 +8,7 @@ type Todo = {
 type TodoStore = {
   items: Todo[];
   add: (todo: Omit<Todo, "id" | "date">) => void;
-  remove: () => void;
+  remove: (id: string) => void;
   removeAllCompeleted: () => void;
 };
 
