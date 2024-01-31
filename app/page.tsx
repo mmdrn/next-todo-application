@@ -42,38 +42,20 @@ export default function Home() {
   };
 
   // render methods
-  const handleRenderItems = (status: Boolean) => {
-    if (status) {
-      return completedItems.length ? (
-        completedItems.map((item) => (
-          <Todo
-            key={item.id}
-            title={item.title}
-            date={moment(item.date).format("MMMM DD YYYY")}
-            status={item.status}
-            clickHandler={() => handleChangeItemStatus(item.id)}
-            deleteHandler={() => removeItem(item.id)}
-          />
-        ))
-      ) : (
-        <EmptyList />
-      );
-    } else {
-      return uncompletedItems.length ? (
-        uncompletedItems.map((item) => (
-          <Todo
-            key={item.id}
-            title={item.title}
-            date={moment(item.date).format("MMMM DD YYYY")}
-            status={item.status}
-            clickHandler={() => handleChangeItemStatus(item.id)}
-            deleteHandler={() => removeItem(item.id)}
-          />
-        ))
-      ) : (
-        <EmptyList />
-      );
-    }
+  const handleRenderItems = (status: boolean) => {
+    const items = status ? completedItems : uncompletedItems;
+    const renderedItems = items.map((item) => (
+      <Todo
+        key={item.id}
+        title={item.title}
+        date={moment(item.date).format("MMMM DD YYYY")}
+        status={item.status}
+        clickHandler={() => handleChangeItemStatus(item.id)}
+        deleteHandler={() => removeItem(item.id)}
+      />
+    ));
+
+    return renderedItems.length ? renderedItems : <EmptyList />;
   };
 
   return (
