@@ -74,8 +74,8 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-start gap-10 w-full">
       {/* header */}
-      <header className="flex justify-center border-b border-slate-300 bg-slate-50 p-4 w-full">
-        <div className="flex items-center justify-start w-3/4">
+      <header className="flex justify-center border-b border-slate-300 bg-slate-50 py-4 w-full">
+        <div className="flex items-center justify-start w-3/4 max-w-7xl">
           <h1 className="font-bold mr-10 text-lg text-slate-700">
             <span className="inline-block mr-2">📝</span> Next Todo Application
           </h1>
@@ -93,7 +93,7 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="flex flex-col items-center gap-10 justify-center w-3/4">
+      <div className="flex flex-col items-center gap-10 justify-center w-3/4 max-w-7xl">
         {/* form */}
         <form
           className="flex flex-col ml-auto mr-auto w-full"
