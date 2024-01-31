@@ -2,21 +2,15 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import { useCallback, useMemo, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useMemo } from "react";
 import Todo from "@/components/todo";
 import EmptyList from "@/components/empty-list";
 import { useTodoStore } from "@/store/todo";
-
-type Todo = {
-  id: string;
-  title: string;
-  date: string;
-  status: boolean;
-};
+import moment from "moment";
 
 export default function Home() {
   const items = useTodoStore((state) => state.items);
+  const addItem = useTodoStore((state) => state.add);
 
   const uncompletedItems = useMemo(() => {
     return items.filter((item) => !item.status);
@@ -26,6 +20,27 @@ export default function Home() {
     return items.filter((item) => item.status);
   }, [items]);
 
+  // methods
+  const handleAddNewItem = () => {
+    addItem({
+      title: "123",
+      status: false,
+    });
+  };
+
+  const handleChangeItemStatus = (id: string) => {
+    const items = useTodoStore.getState().items;
+    const item = items.find((item) => item.id === id);
+
+    if (item) {
+      item.status = !item.status;
+      useTodoStore.setState({ items: [...items] });
+    } else {
+      console.error("item not found!!");
+    }
+  };
+
+  // render methods
   const handleRenderItems = (status: Boolean) => {
     if (status) {
       return completedItems.length ? (
@@ -33,8 +48,9 @@ export default function Home() {
           <Todo
             key={item.id}
             title={item.title}
-            date={item.date}
+            date={moment(item.date).format("MMMM DD YYYY")}
             status={item.status}
+            clickHandler={() => handleChangeItemStatus(item.id)}
           />
         ))
       ) : (
@@ -46,8 +62,9 @@ export default function Home() {
           <Todo
             key={item.id}
             title={item.title}
-            date={item.date}
+            date={moment(item.date).format("MMMM DD YYYY")}
             status={item.status}
+            clickHandler={() => handleChangeItemStatus(item.id)}
           />
         ))
       ) : (
@@ -71,6 +88,7 @@ export default function Home() {
         <button
           type="button"
           className="rounded-md bg-blue-500 hover:bg-blue-700 transition-colors text-white text-sm px-4 h-10 flex items-center pb-0.5 mr-0 ml-auto"
+          onClick={handleAddNewItem}
         >
           <FontAwesomeIcon
             icon={faCirclePlus}
