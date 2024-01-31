@@ -24,6 +24,100 @@ export default function Home() {
           Add Item
         </button>
       </header>
+
+      {/* to-do section */}
+      <section className="flex flex-col ml-auto mr-auto w-3/4 mt-10">
+        <h2 className="font-bold mb-3 text-slate-700">To-do</h2>
+        <div className="grid gap-3">
+          <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors">
+            <div className="flex flex-start justify-start">
+              <span className="flex items-center mr-4">⭕️</span>
+              <p>We should work on our immigration.</p>
+            </div>
+          </article>
+          <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300">
+            <div className="flex flex-start justify-start">
+              <span className="flex items-center mr-4">⭕️</span>
+              <p>We should work on our immigration.</p>
+            </div>
+          </article>
+          <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300">
+            <div className="flex flex-start justify-start">
+              <span className="flex items-center mr-4">⭕️</span>
+              <p>We should work on our immigration.</p>
+            </div>
+          </article>
+          <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300">
+            <div className="flex flex-start justify-start">
+              <span className="flex items-center mr-4">⭕️</span>
+              <p>We should work on our immigration.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* completed section */}
+      <section className="flex flex-col ml-auto mr-auto w-3/4 mt-10">
+        <h2 className="font-bold mb-3 text-slate-700">Completed</h2>
+        <div className="grid gap-3 w-full">
+          <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors grid grid-cols-4 gap-4 w-full">
+            <div className="flex flex-start justify-start col-span-3">
+              <span className="flex items-center mr-4">✅</span>
+              <p className="overflow-hidden truncate">
+                We should work on our immigration.
+              </p>
+            </div>
+            <time
+              className="block text-sm text-slate-400 font-light text-right truncate leading-6"
+              dateTime="2024-01-31"
+            >
+              January 31, 2024
+            </time>
+          </article>
+          <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors grid grid-cols-4 gap-4 w-full">
+            <div className="flex flex-start justify-start col-span-3">
+              <span className="flex items-center mr-4">✅</span>
+              <p className="overflow-hidden truncate">
+                Fix the leaky faucet in the bathroom.
+              </p>
+            </div>
+            <time
+              className="block text-sm text-slate-400 font-light text-right truncate leading-6"
+              dateTime="2024-01-31"
+            >
+              January 30, 2024
+            </time>
+          </article>
+          <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors grid grid-cols-4 gap-4 w-full">
+            <div className="flex flex-start justify-start col-span-3">
+              <span className="flex items-center mr-4">✅</span>
+              <p className="overflow-hidden truncate">
+                Exercise for at least 30 minutes.
+              </p>
+            </div>
+            <time
+              className="block text-sm text-slate-400 font-light text-right truncate leading-6"
+              dateTime="2024-01-31"
+            >
+              January 23, 2024
+            </time>
+          </article>
+          <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors grid grid-cols-4 gap-4 w-full">
+            <div className="flex flex-start justify-start col-span-3">
+              <span className="flex items-center mr-4">✅</span>
+              <p className="overflow-hidden truncate">
+                Complete the project proposal by Friday.
+              </p>
+            </div>
+            <time
+              className="block text-sm text-slate-400 font-light text-right truncate leading-6"
+              dateTime="2024-01-31"
+            >
+              January 19, 2024
+            </time>
+          </article>
+        </div>
+      </section>
     </main>
   );
 }
