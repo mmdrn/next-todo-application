@@ -1,13 +1,13 @@
 type Todo = {
   id: string;
   title: string;
-  date: string;
+  date: number;
   status: boolean;
 };
 
 type TodoStore = {
   items: Todo[];
-  add: (todo: Omit<Todo, "id">) => void;
+  add: (todo: Omit<Todo, "id" | "date">) => void;
   remove: () => void;
   removeAllCompeleted: () => void;
 };
