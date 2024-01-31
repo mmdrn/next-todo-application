@@ -45,5 +45,8 @@ export const useTodoStore = create<TodoStore>()((set) => ({
       items: state.items.filter((i) => i.id !== id),
     }));
   },
-  removeAllCompeleted: () => {},
+  removeAllCompeleted: () => {
+    set((state) => ({
+      items: state.items.filter((i) => !i.status),
+    }));},
 }));
