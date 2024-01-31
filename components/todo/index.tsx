@@ -1,6 +1,6 @@
 import { Props } from "./types";
 
-export default function TodoComponent({ date, title, status }: Props) {
+export default function Todo({ date, title, status }: Props) {
   return (
     <article className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors grid grid-cols-4 gap-4 w-full">
       <div className="flex flex-start justify-start col-span-3">
