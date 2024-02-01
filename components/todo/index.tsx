@@ -1,16 +1,20 @@
+import { memo } from "react";
 import { Props } from "./types";
 
-export default function Todo({
+const Todo = ({
+  id,
   date,
   title,
   status,
   clickHandler,
   deleteHandler,
-}: Props) {
+}: Props) => {
+  console.log("todo component has been rerendered");
+
   return (
     <article
       className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors grid grid-cols-4 gap-4 w-full"
-      onClick={clickHandler}
+      onClick={() => (clickHandler ? clickHandler(id) : undefined)}
     >
       <div className="flex flex-start justify-start col-span-3">
         <span className="flex items-center mr-4">{status ? "✅" : "⭕️"}</span>
@@ -30,7 +34,7 @@ export default function Todo({
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            deleteHandler ? deleteHandler(e) : undefined;
+            deleteHandler ? deleteHandler(id) : undefined;
           }}
         >
           🗑️
@@ -38,4 +42,6 @@ export default function Todo({
       </div>
     </article>
   );
-}
+};
+
+export default memo(Todo);

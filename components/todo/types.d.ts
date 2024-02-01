@@ -1,9 +1,10 @@
 type Props = {
+  id: string;
   title: string;
   date: string;
   status: boolean;
-  clickHandler?: (e: MouseEvent<HTMLElement>) => void;
-  deleteHandler?: (e: MouseEvent<HTMLElement>) => void;
+  clickHandler?: (id: string) => void;
+  deleteHandler?: (id: string) => void;
 };
 
 export { Props };
