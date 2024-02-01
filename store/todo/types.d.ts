@@ -10,6 +10,7 @@ type TodoStore = {
   add: (todo: Omit<Todo, "id" | "date">) => void;
   remove: (id: string) => void;
   removeAllCompeleted: () => void;
+  changeState: (id: string) => void;
 };
 
 export { Todo, TodoStore };
