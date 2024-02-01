@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Todo from "@/components/todo";
 import EmptyList from "@/components/empty-list";
 import { useTodoStore } from "@/store/todo";
@@ -13,6 +13,7 @@ export default function Home() {
   const removeAllCompeletedItems = useTodoStore(
     (state) => state.removeAllCompeleted
   );
+  const changeState = useTodoStore((state) => state.changeState);
 
   const [newItemTitle, setNewItemTitle] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -43,34 +44,30 @@ export default function Home() {
     setNewItemTitle("");
   };
 
-  const handleChangeItemStatus = (id: string) => {
-    const items = useTodoStore.getState().items;
-    const item = items.find((item) => item.id === id);
-
-    if (item) {
-      item.status = !item.status;
-      useTodoStore.setState({ items: [...items] });
-    } else {
-      console.error("item not found!!");
-    }
-  };
+  const handleChangeItemStatus = useCallback((id: string): void => {
+    changeState(id);
+  }, []);
 
   // render methods
-  const handleRenderItems = (status: boolean) => {
-    const items = status ? completedItems : uncompletedItems;
-    const renderedItems = items.map((item) => (
-      <Todo
-        key={item.id}
-        title={item.title}
-        date={moment(item.date).format("MMMM DD YYYY")}
-        status={item.status}
-        clickHandler={() => handleChangeItemStatus(item.id)}
-        deleteHandler={() => removeItem(item.id)}
-      />
-    ));
+  const handleRenderItems = useCallback(
+    (status: boolean) => {
+      const items = status ? completedItems : uncompletedItems;
+      const renderedItems = items.map((item) => (
+        <Todo
+          key={item.id}
+          id={item.id}
+          title={item.title}
+          date={moment(item.date).format("MMMM DD YYYY")}
+          status={item.status}
+          clickHandler={handleChangeItemStatus}
+          deleteHandler={removeItem}
+        />
+      ));
 
-    return renderedItems.length ? renderedItems : <EmptyList />;
-  };
+      return renderedItems.length ? renderedItems : <EmptyList />;
+    },
+    [completedItems, uncompletedItems]
+  );
 
   return (
     <main className="flex flex-col items-center justify-start gap-10 w-full">
