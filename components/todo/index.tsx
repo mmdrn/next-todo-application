@@ -9,8 +9,6 @@ const Todo = ({
   clickHandler,
   deleteHandler,
 }: Props) => {
-  console.log("todo component has been rerendered");
-
   return (
     <article
       className="rounded-md px-2 py-2 bg-slate-50 border border-slate-300 cursor-pointer hover:border-blue-500 transition-colors grid grid-cols-4 gap-4 w-full"
